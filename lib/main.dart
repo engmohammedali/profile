@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(const MyPortfolioApp());
@@ -10,7 +11,7 @@ class MyPortfolioApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'محمد محم علي| مهندس برمجيات',
+      title: 'Mohammed Mohammed Ali | Software Engineer',
       theme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
       home: const HomePage(),
@@ -31,29 +32,31 @@ class HomePage extends StatelessWidget {
             children: [
               const CircleAvatar(
                 radius: 60,
-                backgroundImage: AssetImage('assets/profile.jpg'), // ضع صورتك هنا
+                backgroundImage: AssetImage(
+                  'assets/profile.jpg',
+                ), // Put your profile picture here
               ),
               const SizedBox(height: 16),
               const Text(
-                'محمد محمد علي',
+                'Mohammed Mohammed Ali',
                 style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
               ),
               const Text(
-                'مهندس برمجيات | مطوّر Flutter',
+                'Software Engineer | Flutter Developer',
                 style: TextStyle(fontSize: 20),
               ),
               const SizedBox(height: 32),
 
               const Text(
-                'أنا مطور تطبيقات موبايل باستخدام Flutter. أمتلك خبرة في Clean Architecture، Firebase،'
-                ' وتحسين تجربة المستخدم.\nأطمح لصناعة تطبيقات ذات جودة عالية وسهلة الاستخدام.',
+                'I am a mobile app developer using Flutter. Experienced in Clean Architecture, Firebase, '
+                'and enhancing user experience.\nI strive to build high-quality and user-friendly applications.',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 16),
               ),
 
               const SizedBox(height: 32),
               Text(
-                '📱 المشاريع',
+                '📱 Projects',
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               const SizedBox(height: 16),
@@ -63,25 +66,71 @@ class HomePage extends StatelessWidget {
                 runSpacing: 16,
                 children: const [
                   ProjectCard(
-                    title: 'تطبيق الطلبات',
-                    description: 'نظام عرض طلبات للمطاعم على التابلت باستخدام Flutter وFirebase.',
+                    title: 'Order App',
+                    description:
+                        'A restaurant order display system on tablets using Flutter and Firebase.',
                   ),
                   ProjectCard(
-                    title: 'لوحة تحكم تعليمية',
-                    description: 'إدارة معاهد دراسية ومعلمين وطلاب باستخدام Flutter Web وClean Architecture.',
+                    title: 'Educational Dashboard',
+                    description:
+                        'Manage institutes, teachers, and students using Flutter Web and Clean Architecture.',
                   ),
                 ],
               ),
 
               const SizedBox(height: 32),
-              Text(
-                '📬 تواصل معي',
-                style: Theme.of(context).textTheme.headlineSmall,
+              Column(
+                children: [
+                  Text(
+                    '📬 Contact Me',
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                  const SizedBox(height: 8),
+                  GestureDetector(
+                    onTap:
+                        () => launchUrl(
+                          Uri.parse('mailto:mohammedaliabomhde@example.com'),
+                        ),
+                    child: const Text(
+                      'Email: mohammedaliabomhde@example.com',
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap:
+                        () => launchUrl(
+                          Uri.parse('https://github.com/engmohammedali'),
+                        ),
+                    child: const Text(
+                      'GitHub: github.com/engmohammedali',
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap:
+                        () => launchUrl(
+                          Uri.parse(
+                            'https://www.linkedin.com/in/mohammed-ali-5a04b82ba/',
+                          ),
+                        ),
+                    child: const Text(
+                      'LinkedIn: linkedin.com/in/mohammed-ali-5a04b82ba',
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap:
+                        () => launchUrl(
+                          Uri.parse('https://wa.me/37060683712'),
+                          mode: LaunchMode.externalApplication,
+                        ),
+                    child: const Text(
+                      'WhatsApp: +370 60683712',
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(height: 8),
-              Text('Email: mohammedaliabomhde@example.com'),
-              Text('GitHub: github.com/mohamed2003'),
-              Text('LinkedIn: linkedin.com/in/mohamed2003'),
             ],
           ),
         ),
@@ -110,7 +159,10 @@ class ProjectCard extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            Text(title, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            Text(
+              title,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 8),
             Text(description, textAlign: TextAlign.center),
           ],
